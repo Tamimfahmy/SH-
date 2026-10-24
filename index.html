@@ -14,7 +14,7 @@
         body {
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #12050e 0%, #2c1622 50%, #1a0d14 100%);
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,9 +32,9 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 215, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             padding: 8px 16px;
             border-radius: 30px;
             display: flex;
@@ -42,10 +42,10 @@
             gap: 10px;
             cursor: pointer;
             z-index: 600;
-            color: #ffd700;
+            color: #ffffff;
             font-size: 13px;
             font-weight: bold;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 5px 20px rgba(136, 14, 79, 0.3);
             transition: background 0.2s, transform 0.2s;
             opacity: 0;
             pointer-events: none;
@@ -54,7 +54,7 @@
             opacity: 1;
             pointer-events: auto;
         }
-        .music-player:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.05); }
+        .music-player:hover { background: rgba(255, 255, 255, 0.35); transform: scale(1.05); }
 
         .bars {
             display: flex;
@@ -64,7 +64,7 @@
         }
         .bar {
             width: 3px;
-            background: #ffd700;
+            background: #ffffff;
             border-radius: 2px;
             height: 4px;
         }
@@ -83,7 +83,7 @@
             position: fixed; 
             top: 0; left: 0; 
             width: 100vw; height: 100vh; 
-            background: linear-gradient(135deg, #12050e 0%, #2c1622 50%, #1a0d14 100%);
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
             z-index: 99999; 
             display: flex; 
             flex-direction: column; 
@@ -92,37 +92,54 @@
         }
 
         .lock-box {
-            background: rgba(45, 18, 38, 0.9); 
+            background: rgba(255, 255, 255, 0.9); 
             padding: 35px; 
             border-radius: 25px; 
             text-align: center; 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(136, 14, 79, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.9);
             width: 90%;
             max-width: 400px;
         }
 
-        /* --- LIVE BACKGROUND STARFIELD --- */
-        #starCanvas {
+        /* --- LIVE BACKGROUND FLOATING ANIMATIONS --- */
+        .bg-animations {
             position: absolute;
             top: 0; left: 0; width: 100vw; height: 100vh;
             overflow: hidden; z-index: 1; pointer-events: none;
         }
 
+        .bg-floater {
+            position: absolute; bottom: -100px;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic; font-weight: bold; white-space: nowrap;
+            animation: floatUp linear infinite;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            will-change: transform; 
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(-10deg) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(10deg) scale(1.2); opacity: 0; }
+        }
+
         /* --- INITIAL START CARD --- */
         .card {
             position: absolute; width: 90vw; max-width: 480px; height: 70vh; max-height: 620px;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(16px); border: 2px solid rgba(255, 215, 0, 0.4);
-            border-radius: 35px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px); border: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 35px; box-shadow: 0 25px 50px rgba(136, 14, 79, 0.25);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer; z-index: 100;
             transition: opacity 0.15s ease;
+            transform: translateZ(0);
         }
 
-        .heart-icon { font-size: 90px; animation: pulse 1.2s infinite; filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.8)); }
-        .title { margin-top: 20px; font-size: 30px; color: #ffd700; font-style: italic; font-weight: bold; text-align: center; padding: 0 15px; text-shadow: 0 2px 10px rgba(255,215,0,0.4); }
-        .instruction { margin-top: 25px; font-size: 15px; letter-spacing: 3px; color: #ff80ab; font-weight: bold; text-transform: uppercase; }
+        .heart-icon { font-size: 90px; animation: pulse 1.2s infinite; }
+        .title { margin-top: 20px; font-size: 30px; color: #880e4f; font-style: italic; font-weight: bold; text-align: center; padding: 0 15px; }
+        .instruction { margin-top: 25px; font-size: 15px; letter-spacing: 3px; color: #ad1457; font-weight: bold; }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
@@ -143,6 +160,7 @@
         .particle {
             position: absolute; pointer-events: none; z-index: 200;
             animation: explodeParticle 0.4s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+            will-change: transform;
         }
 
         @keyframes explodeParticle {
@@ -150,162 +168,153 @@
             100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr)); opacity: 0; }
         }
 
-        /* --- BOUQUET SCENE CONTAINER --- */
+        /* --- TREE SCENE --- */
         .tree-scene {
-            position: absolute; width: 100vw; height: 100vh;
+            position: relative; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10;
-            opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
         .tree-scene.bloom { opacity: 1; pointer-events: auto; }
 
         .birthday-text {
-            position: absolute; top: 20px; font-size: clamp(22px, 3.5vw, 36px);
-            color: #ffd700; text-shadow: 0 3px 12px rgba(255, 215, 0, 0.6);
-            font-style: italic; font-weight: bold; z-index: 30; text-align: center; width: 100%;
+            position: absolute; top: 2vh; font-size: clamp(24px, 3.8vw, 46px);
+            color: #ffffff; text-shadow: 0 4px 15px rgba(216, 27, 96, 0.6);
+            font-weight: bold; z-index: 20; text-align: center; width: 100%;
         }
 
-        /* Responsive Bouquet Box */
-        .bouquet-wrapper {
-            position: relative;
-            width: min(85vw, 650px);
-            height: min(75vh, 600px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
+        .tree-wrapper { 
+            position: relative; width: 900px; height: 800px; margin-top: 40px; 
+            transform-origin: center center; transition: transform 0.3s ease;
         }
 
-        /* Luxury Black & Gold Wrapped Cone */
-        .bouquet-cone {
-            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 150px; height: 140px;
-            background: linear-gradient(135deg, #1e1e1e 0%, #0a0a0a 100%);
-            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8); z-index: 5;
-            border: 2px solid #ffd700;
-        }
-        .bouquet-cone::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 12px;
-            background: linear-gradient(90deg, #ffd700, #ffea80, #ffd700);
-        }
-        .bouquet-ribbon {
-            position: absolute; bottom: 125px; left: 50%; transform: translateX(-50%);
-            font-size: 36px; z-index: 8; filter: drop-shadow(0 3px 8px rgba(233, 30, 99, 0.8));
+        /* Trunk */
+        .tree-trunk {
+            position: absolute; bottom: 20px; left: 50%; width: 34px; height: 380px;
+            background: linear-gradient(to right, #4e342e, #6d4c41, #4e342e);
+            border-radius: 17px; z-index: 2; transform: translateX(-50%);
         }
 
-        /* SVG Stems connecting flowers to bouquet */
-        .bouquet-stems {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none;
+        /* Canvas for 1,800 hearts */
+        #heartCanvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none;
         }
 
         /* --- DANGLING SWINGING 18 PHOTOS --- */
-        .flower-photo {
-            position: absolute;
-            width: clamp(48px, 6vw, 68px);
-            height: clamp(48px, 6vw, 68px);
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #ffd700;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 12px rgba(255, 64, 129, 0.6);
-            cursor: pointer;
-            transition: transform 0.25s ease;
-            z-index: 20;
-            animation: swing 3.5s ease-in-out infinite alternate;
-            transform-origin: top center;
+        .photo-wrapper {
+            position: absolute; width: 85px; height: 110px; z-index: 10; transform-origin: top center;
         }
-        @keyframes swing { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
-
-        .flower-photo:hover {
-            transform: scale(1.3) rotate(0deg) !important;
-            border-color: #ff4081;
-            z-index: 100;
+        .stem {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 25px; background: #4e342e; border-radius: 2px; z-index: 11;
         }
-
-        .flower-photo img {
-            width: 100%; height: 100%; object-fit: cover;
+        .dangler {
+            position: absolute; top: 20px; left: 0; width: 85px; height: 85px;
+            transform-origin: top center; animation: swing 3.5s ease-in-out infinite alternate;
+            cursor: pointer; will-change: transform;
         }
+        @keyframes swing { 0% { transform: rotate(-8deg); } 100% { transform: rotate(8deg); } }
 
-        /* Precise Natural Bouquet Layout Coordinates */
-        .fp1  { top: 5%;  left: 47%; animation-delay: 0s; }
-        .fp2  { top: 12%; left: 34%; animation-delay: -0.4s; }
-        .fp3  { top: 12%; left: 60%; animation-delay: -0.8s; }
-        .fp4  { top: 22%; left: 22%; animation-delay: -1.2s; }
-        .fp5  { top: 22%; left: 72%; animation-delay: -1.6s; }
-        .fp6  { top: 26%; left: 40%; animation-delay: -0.5s; }
-        .fp7  { top: 26%; left: 54%; animation-delay: -1.5s; }
-        .fp8  { top: 36%; left: 12%; animation-delay: -0.3s; }
-        .fp9  { top: 36%; left: 82%; animation-delay: -1.1s; }
-        .fp10 { top: 38%; left: 30%; animation-delay: -0.7s; }
-        .fp11 { top: 38%; left: 64%; animation-delay: -1.3s; }
-        .fp12 { top: 48%; left: 20%; animation-delay: -0.2s; }
-        .fp13 { top: 48%; left: 74%; animation-delay: -1.7s; }
-        .fp14 { top: 52%; left: 47%; animation-delay: -0.9s; }
-        .fp15 { top: 58%; left: 35%; animation-delay: -0.6s; }
-        .fp16 { top: 58%; left: 59%; animation-delay: -1.4s; }
-        .fp17 { top: 66%; left: 47%; animation-delay: -0.5s; }
-        .fp18 { top: 74%; left: 47%; animation-delay: -1.0s; }
+        .img-box {
+            width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+            border: 4px solid #ffffff; box-shadow: 0 10px 25px rgba(216, 27, 96, 0.5);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .dangler:hover .img-box { transform: scale(1.3); box-shadow: 0 18px 40px rgba(216, 27, 96, 0.8); border-color: #ffb3c6; }
+        .photo-wrapper:hover { z-index: 100; }
+
+        /* 18 Photo Coordinates across the Heart Canopy */
+        .p1  { top: 120px; left: 380px; }
+        .p2  { top: 120px; left: 520px; }
+        .p3  { top: 170px; left: 270px; }
+        .p4  { top: 170px; left: 450px; }
+        .p5  { top: 170px; left: 630px; }
+        .p6  { top: 230px; left: 190px; }
+        .p7  { top: 230px; left: 350px; }
+        .p8  { top: 230px; left: 550px; }
+        .p9  { top: 230px; left: 710px; }
+        .p10 { top: 290px; left: 270px; }
+        .p11 { top: 290px; left: 450px; }
+        .p12 { top: 290px; left: 630px; }
+        .p13 { top: 360px; left: 360px; }
+        .p14 { top: 360px; left: 540px; }
+        .p15 { top: 420px; left: 450px; }
+        .p16 { top: 110px; left: 450px; }
+        .p17 { top: 330px; left: 190px; }
+        .p18 { top: 330px; left: 710px; }
+
+        /* --- MOBILE RESPONSIVE SCALING --- */
+        @media (max-width: 950px) {
+            .tree-wrapper { transform: scale(0.60); }
+        }
+        @media (max-width: 600px) {
+            .tree-wrapper { transform: scale(0.42); }
+        }
 
         /* --- FLOATING LOVE LETTER BUTTON --- */
         .letter-btn {
-            position: fixed; bottom: 20px; left: 20px;
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            color: #ffd700; padding: 10px 20px; border-radius: 30px;
-            font-size: 14px; font-weight: bold; font-family: 'Georgia', serif;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4); cursor: pointer; z-index: 500;
-            display: flex; align-items: center; gap: 8px; border: 2px solid rgba(255, 215, 0, 0.4);
-            transition: transform 0.3s, background 0.2s;
+            position: fixed; bottom: 25px; left: 25px;
+            background: white; color: #880e4f;
+            padding: 12px 22px; border-radius: 30px;
+            font-size: 15px; font-weight: bold; font-family: 'Georgia', serif;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            cursor: pointer; z-index: 500;
+            display: flex; align-items: center; gap: 8px;
+            border: 2px solid #ff80ab;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s;
         }
-        .letter-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+        .letter-btn:hover { background: #ffe4e6; transform: scale(1.08); }
 
         /* --- SCANNABLE QR CODE FOOTER --- */
         .qr-section {
-            position: fixed; bottom: 20px; right: 20px;
-            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px);
-            padding: 6px 14px; border-radius: 18px; display: flex; align-items: center; gap: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.3); cursor: pointer; z-index: 500;
+            position: fixed; bottom: 25px; right: 25px;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+            padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 12px;
+            border: 2px solid #ff80ab; cursor: pointer; z-index: 500;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             transition: transform 0.2s, background 0.2s;
         }
-        .qr-section:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.03); }
-        .qr-code-box { width: 40px; height: 40px; background: white; padding: 2px; border-radius: 5px; }
+        .qr-section:hover { background: #ffffff; transform: scale(1.03); }
+        .qr-code-box { width: 45px; height: 45px; background: white; padding: 2px; border-radius: 6px; }
         .qr-code-box img { width: 100%; height: 100%; }
-        .qr-text h4 { font-size: 11px; color: #ffd700; }
-        .qr-text p { font-size: 9px; color: #fce4ec; }
+        .qr-text h4 { font-size: 12px; color: #880e4f; }
+        .qr-text p { font-size: 10px; color: #ad1457; }
 
         /* --- LIGHTBOX & MODALS --- */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.92);
+            background: rgba(0, 0, 0, 0.9);
             display: flex; justify-content: center; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.25s ease; z-index: 1000;
         }
         .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox img {
-            max-width: 85vw; max-height: 85vh; border-radius: 20px; border: 4px solid #ffd700;
+            max-width: 85vw; max-height: 85vh; border-radius: 20px; border: 6px solid white;
             box-shadow: 0 25px 70px rgba(0,0,0,0.8);
             transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .lightbox.active img { transform: scale(1); }
 
         .letter-modal-card {
-            background: rgba(45, 18, 38, 0.95); padding: 30px; border-radius: 25px;
-            border: 3px solid #ffd700; text-align: center; box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+            background: rgba(255, 255, 255, 0.96); color: #4a1535; padding: 35px; border-radius: 25px;
+            border: 3px solid #ff80ab; text-align: center; box-shadow: 0 25px 70px rgba(0,0,0,0.8);
             max-width: 380px; width: 90%; transform: scale(0.8); transition: transform 0.3s;
         }
         .lightbox.active .letter-modal-card { transform: scale(1); }
-        .letter-modal-card h3 { font-size: 22px; color: #ffd700; margin-bottom: 10px; font-style: italic; }
-        .letter-modal-card p { font-size: 14px; line-height: 1.6; color: #fce4ec; margin-bottom: 20px; }
+        .letter-modal-card h3 { font-size: 24px; color: #880e4f; margin-bottom: 12px; font-style: italic; }
+        .letter-modal-card p { font-size: 14px; line-height: 1.6; color: #5c1d39; margin-bottom: 20px; }
 
         .qr-modal-card {
-            background: rgba(45, 18, 38, 0.95); padding: 25px; border-radius: 25px;
-            border: 3px solid #ffd700; text-align: center; box-shadow: 0 25px 70px rgba(0,0,0,0.9);
-            max-width: 300px; width: 90%; transform: scale(0.8); transition: transform 0.3s;
+            background: rgba(255, 255, 255, 0.96); padding: 30px; border-radius: 25px;
+            border: 3px solid #ff80ab; text-align: center; box-shadow: 0 25px 70px rgba(0,0,0,0.8);
+            max-width: 320px; width: 90%; transform: scale(0.8); transition: transform 0.3s;
         }
         .lightbox.active .qr-modal-card { transform: scale(1); }
-        .qr-modal-card img { width: 200px; height: 200px; border-radius: 10px; border: 3px solid white; margin-bottom: 12px; }
-        .qr-modal-card p { color: #ffd700; font-size: 14px; margin-bottom: 12px; font-weight: bold; }
+        .qr-modal-card img { width: 220px; height: 220px; border-radius: 10px; border: 3px solid white; margin-bottom: 15px; }
+        .qr-modal-card p { color: #880e4f; font-size: 15px; margin-bottom: 15px; font-weight: bold; }
 
         .close-hint {
-            position: absolute; bottom: 30px; color: #ffd700; font-size: 13px; letter-spacing: 2px;
+            position: absolute; bottom: 35px; color: white; font-size: 14px; letter-spacing: 2px;
             background: rgba(0,0,0,0.7); padding: 8px 20px; border-radius: 20px;
         }
     </style>
@@ -315,11 +324,11 @@
     <!-- PASSWORD LOCK SCREEN -->
     <div id="lockScreen">
         <div class="lock-box">
-            <h2 style="color:#ffd700; margin-bottom:15px; font-style:italic;">🔒 Private Anniversary Gift</h2>
-            <p style="color:#fce4ec; margin-bottom:15px; font-size:14px;">Enter the secret password to unlock:</p>
-            <input type="password" id="passInput" placeholder="Password..." style="padding:10px; border-radius:10px; border:1px solid rgba(255,215,0,0.5); background:rgba(255,255,255,0.1); color:white; font-size:16px; outline:none; text-align:center; width: 80%;">
+            <h2 style="color:#880e4f; margin-bottom:15px; font-style:italic;">🔒 Private Anniversary Gift</h2>
+            <p style="color:#ad1457; margin-bottom:15px; font-size:14px;">Enter the secret password to unlock:</p>
+            <input type="password" id="passInput" placeholder="Password..." style="padding:10px; border-radius:10px; border:1px solid #ccc; font-size:16px; outline:none; text-align:center; width: 80%;">
             <br><br>
-            <button onclick="checkPassword()" style="background:linear-gradient(135deg, #e91e63, #ad1457); color:white; border:2px solid #ffd700; padding:10px 22px; border-radius:20px; cursor:pointer; font-weight:bold; font-family:'Georgia',serif;">Enter ❤️</button>
+            <button onclick="checkPassword()" style="background:#880e4f; color:white; border:none; padding:10px 20px; border-radius:10px; cursor:pointer; font-weight:bold;">Enter ❤️</button>
         </div>
     </div>
 
@@ -337,75 +346,43 @@
         <span id="musicLabel">Playing Music</span>
     </div>
 
-    <!-- CANVAS STARFIELD -->
-    <canvas id="starCanvas"></canvas>
+    <!-- LIVE BACKGROUND FLOATERS -->
+    <div class="bg-animations" id="bgAnimations"></div>
 
     <!-- START CARD -->
     <div class="card" id="card">
         <div class="heart-icon">💖</div>
         <div class="title">Happy 24th Anniversary<br>Sherien & Sherif</div>
-        <div class="instruction">TAP TO OPEN & BLOOM</div>
+        <div class="instruction">TAP TO SHOOT & BLOOM</div>
     </div>
 
-    <!-- MAIN BOUQUET SCENE -->
+    <!-- MAIN TREE SCENE -->
     <div class="tree-scene" id="treeScene">
         <h1 class="birthday-text">Happy 24th Anniversary Sherien & Sherif ❤️</h1>
         
-        <div class="bouquet-wrapper">
-            <!-- Thick Organic Pinkish Stems -->
-            <svg class="bouquet-stems" viewBox="0 0 600 600">
-                <defs>
-                    <linearGradient id="stemGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stop-color="#ad1457" />
-                        <stop offset="50%" stop-color="#e91e63" />
-                        <stop offset="100%" stop-color="#ff80ab" />
-                    </linearGradient>
-                </defs>
-                <g stroke="url(#stemGrad)" stroke-width="5" fill="none" stroke-linecap="round" filter="drop-shadow(0 0 5px rgba(255, 64, 129, 0.4))">
-                    <path d="M 300 500 Q 300 300 295 50" />
-                    <path d="M 300 500 Q 250 280 215 90" />
-                    <path d="M 300 500 Q 350 280 385 90" />
-                    <path d="M 300 500 Q 200 250 145 150" />
-                    <path d="M 300 500 Q 400 250 455 150" />
-                    <path d="M 300 500 Q 260 270 255 185" />
-                    <path d="M 300 500 Q 340 270 345 185" />
-                    <path d="M 300 500 Q 150 280 85 245" />
-                    <path d="M 300 500 Q 450 280 515 245" />
-                    <path d="M 300 500 Q 220 290 205 260" />
-                    <path d="M 300 500 Q 380 290 395 260" />
-                    <path d="M 300 500 Q 170 320 135 325" />
-                    <path d="M 300 500 Q 430 320 465 325" />
-                    <path d="M 300 500 Q 300 350 300 360" />
-                    <path d="M 300 500 Q 230 350 235 400" />
-                    <path d="M 300 500 Q 370 350 365 400" />
-                    <path d="M 300 500 Q 300 400 300 450" />
-                    <path d="M 300 500 Q 300 450 300 500" />
-                </g>
-            </svg>
-
-            <!-- Bouquet Cone & Ribbon -->
-            <div class="bouquet-ribbon">🎀</div>
-            <div class="bouquet-cone"></div>
+        <div class="tree-wrapper" id="treeWrapper">
+            <div class="tree-trunk"></div>
+            <canvas id="heartCanvas" width="900" height="800"></canvas>
 
             <!-- 18 Photo Flower Heads (photo2.jpg to photo19.jpg) -->
-            <div class="flower-photo fp1" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
-            <div class="flower-photo fp2" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
-            <div class="flower-photo fp3" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
-            <div class="flower-photo fp4" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
-            <div class="flower-photo fp5" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
-            <div class="flower-photo fp6" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
-            <div class="flower-photo fp7" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
-            <div class="flower-photo fp8" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
-            <div class="flower-photo fp9" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
-            <div class="flower-photo fp10" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
-            <div class="flower-photo fp11" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
-            <div class="flower-photo fp12" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
-            <div class="flower-photo fp13" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
-            <div class="flower-photo fp14" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
-            <div class="flower-photo fp15" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
-            <div class="flower-photo fp16" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
-            <div class="flower-photo fp17" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
-            <div class="flower-photo fp18" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+            <div class="photo-wrapper p1"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: 0s;"><div class="img-box"><img src="images/photo2.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p2"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.5s;"><div class="img-box"><img src="images/photo3.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p3"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1s;"><div class="img-box"><img src="images/photo4.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p4"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.5s;"><div class="img-box"><img src="images/photo5.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p5"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -2s;"><div class="img-box"><img src="images/photo6.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p6"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.8s;"><div class="img-box"><img src="images/photo7.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p7"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.8s;"><div class="img-box"><img src="images/photo8.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p8"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.3s;"><div class="img-box"><img src="images/photo9.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p9"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.3s;"><div class="img-box"><img src="images/photo10.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p10"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.6s;"><div class="img-box"><img src="images/photo11.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p11"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.1s;"><div class="img-box"><img src="images/photo12.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p12"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.4s;"><div class="img-box"><img src="images/photo13.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p13"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.6s;"><div class="img-box"><img src="images/photo14.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p14"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.7s;"><div class="img-box"><img src="images/photo15.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p15"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.4s;"><div class="img-box"><img src="images/photo16.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p16"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.9s;"><div class="img-box"><img src="images/photo17.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p17"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.2s;"><div class="img-box"><img src="images/photo18.jpg" alt="Memory"></div></div></div>
+            <div class="photo-wrapper p18"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.5s;"><div class="img-box"><img src="images/photo19.jpg" alt="Memory"></div></div></div>
         </div>
     </div>
 
@@ -436,7 +413,7 @@
         <div class="letter-modal-card" onclick="event.stopPropagation()">
             <h3>Dear Sherien & Sherif</h3>
             <p>Happy late 24th anniversary! We wish you many more years filled with endless love, health, and beautiful memories together. ❤️</p>
-            <button onclick="closeLetterModal()" style="background: linear-gradient(135deg, #e91e63, #ad1457); color:white; border:2px solid #ffd700; padding:8px 22px; border-radius:20px; cursor:pointer; font-weight:bold; font-family:'Georgia',serif;">Close</button>
+            <button onclick="closeLetterModal()" style="background:#880e4f; color:white; border:none; padding:8px 22px; border-radius:20px; cursor:pointer; font-weight:bold; font-family:'Georgia',serif;">Close</button>
         </div>
     </div>
 
@@ -445,7 +422,7 @@
         <div class="qr-modal-card" onclick="event.stopPropagation()">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://tamimfahmy.github.io/SH-/" alt="Enlarged QR Code">
             <p>Scan with any phone camera ❤️</p>
-            <button onclick="closeQRModal()" style="background: linear-gradient(135deg, #e91e63, #ad1457); color:white; border:2px solid #ffd700; padding:8px 22px; border-radius:20px; cursor:pointer; font-weight:bold; font-family:'Georgia',serif;">Close</button>
+            <button onclick="closeQRModal()" style="background:#880e4f; color:white; border:none; padding:8px 22px; border-radius:20px; cursor:pointer; font-weight:bold; font-family:'Georgia',serif;">Close</button>
         </div>
     </div>
 
@@ -466,52 +443,64 @@
             }
         });
 
-        // --- 60 FPS CANVAS STARFIELD ---
-        const canvasStar = document.getElementById('starCanvas');
-        const ctxStar = canvasStar.getContext('2d');
-
-        function resizeStarCanvas() {
-            canvasStar.width = window.innerWidth;
-            canvasStar.height = window.innerHeight;
+        // --- BACKGROUND FLOATERS ---
+        const bgContainer = document.getElementById('bgAnimations');
+        const bgFragment = document.createDocumentFragment();
+        const floatingItems = ['🌹', 'I love you', '🌹', 'Happy 24th Anniversary', '🌹', 'Sherien & Sherif', '🌸'];
+        
+        for (let i = 0; i < 25; i++) {
+            const floater = document.createElement('div');
+            floater.className = 'bg-floater';
+            floater.innerHTML = floatingItems[Math.floor(Math.random() * floatingItems.length)];
+            floater.style.left = `${Math.random() * 100}vw`;
+            const isText = floater.innerHTML.length > 2;
+            floater.style.fontSize = isText ? `${14 + Math.random() * 8}px` : `${18 + Math.random() * 12}px`;
+            floater.style.animationDuration = `${10 + Math.random() * 8}s`;
+            floater.style.animationDelay = `${Math.random() * 8}s`;
+            bgFragment.appendChild(floater);
         }
-        window.addEventListener('resize', resizeStarCanvas);
-        resizeStarCanvas();
+        bgContainer.appendChild(bgFragment);
 
-        const stars = [];
-        for (let i = 0; i < 55; i++) {
-            stars.push({
-                x: Math.random() * canvasStar.width,
-                y: Math.random() * canvasStar.height,
-                size: Math.random() * 2.2 + 0.8,
-                speed: Math.random() * 0.35 + 0.15,
-                opacity: Math.random(),
-                opacitySpeed: Math.random() * 0.015 + 0.005
+        // --- 1,800 HEARTS DRAWN VIA CANVAS ---
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function isInsideHeart(x, y) {
+            let nx = x / 260; 
+            let ny = -y / 260; 
+            let eq = Math.pow(nx*nx + ny*ny - 1, 3) - (nx*nx * ny*ny*ny);
+            return eq <= 0;
+        }
+
+        const heartLeaves = [];
+        const heartSymbols = ['❤️', '💖', '💗', '💓', '💞', '🌸', '🌹'];
+        
+        for (let i = 0; i < 1800; i++) {
+            let x, y;
+            do {
+                x = (Math.random() - 0.5) * 620;
+                y = (Math.random() - 0.5) * 620;
+            } while (!isInsideHeart(x, y));
+
+            heartLeaves.push({
+                x: 450 + x,
+                y: 260 + y,
+                size: 14 + Math.random() * 16,
+                symbol: heartSymbols[Math.floor(Math.random() * heartSymbols.length)]
             });
         }
 
-        function animateStars() {
-            ctxStar.clearRect(0, 0, canvasStar.width, canvasStar.height);
-            
-            for (let star of stars) {
-                star.y -= star.speed;
-                if (star.y < 0) {
-                    star.y = canvasStar.height;
-                    star.x = Math.random() * canvasStar.width;
-                }
+        function drawHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
 
-                star.opacity += star.opacitySpeed;
-                if (star.opacity > 1 || star.opacity < 0.15) {
-                    star.opacitySpeed = -star.opacitySpeed;
-                }
-
-                ctxStar.fillStyle = `rgba(255, 215, 0, ${star.opacity})`;
-                ctxStar.beginPath();
-                ctxStar.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctxStar.fill();
+            for (let leaf of heartLeaves) {
+                ctx.font = `${leaf.size}px sans-serif`;
+                ctx.fillText(leaf.symbol, leaf.x, leaf.y);
             }
-            requestAnimationFrame(animateStars);
         }
-        animateStars();
+        drawHearts();
 
         // --- AUDIO & WIDGET CONTROLS ---
         const audio = document.getElementById('bgMusic');
