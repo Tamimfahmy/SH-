@@ -158,7 +158,7 @@
             z-index: 30;
         }
 
-        /* --- BOUQUET & ORGANIC PINK STEM STRUCTURE --- */
+        /* --- BOUQUET & RICH DOME STRUCTURE --- */
         .bouquet-container {
             position: relative;
             width: 460px;
@@ -173,7 +173,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Thick, organic pinkish stems emerging from the bouquet wrap */
+        /* Pink gradient stems */
         .bouquet-stems {
             position: absolute;
             top: 0; left: 0;
@@ -185,7 +185,7 @@
         /* Photo Flower Heads */
         .flower-photo {
             position: absolute;
-            width: 62px; height: 62px;
+            width: 60px; height: 60px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #ffd700;
@@ -207,28 +207,37 @@
             object-fit: cover;
         }
 
-        /* Covered Roots / Bouquet Wrapper Cone */
+        /* Luxury Black & Gold Wrapping Paper Cone */
         .bouquet-cone {
             position: absolute;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 160px; height: 150px;
-            background: linear-gradient(135deg, #7b1fa2, #4a148c);
-            clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            width: 180px; height: 160px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #0a0a0a 100%);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
             z-index: 15;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            border: 2px solid #ffd700;
         }
 
+        .bouquet-cone::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 12px;
+            background: linear-gradient(90deg, #ffd700, #ffea80, #ffd700);
+            opacity: 0.9;
+        }
+
+        /* Vibrant Red Ribbon Bow */
         .bouquet-ribbon {
             position: absolute;
-            bottom: 95px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 34px;
+            font-size: 40px;
             z-index: 20;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 3px 8px rgba(233, 30, 99, 0.8));
         }
 
         /* --- LETTER TOGGLE BUTTON & MODAL CARD --- */
@@ -378,7 +387,7 @@
                     </linearGradient>
                 </defs>
                 <g stroke="url(#stemGrad)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(255, 64, 129, 0.5))">
-                    <path d="M 230 350 Q 230 200 212 41" />
+                    <path d="M 230 350 Q 230 200 212" />
                     <path d="M 230 350 Q 190 190 140 71" />
                     <path d="M 230 350 Q 270 190 282 71" />
                     <path d="M 230 350 Q 160 180 65 111" />
@@ -425,7 +434,7 @@
             <div class="flower-photo" style="top: 240px; left: 181px;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
             <div class="flower-photo" style="top: 280px; left: 181px;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
 
-            <!-- Covered Roots / Bouquet Cone & Ribbon -->
+            <!-- Black & Gold Wrapped Cone & Red Ribbon Bow -->
             <div class="bouquet-ribbon">🎀</div>
             <div class="bouquet-cone"></div>
         </div>
