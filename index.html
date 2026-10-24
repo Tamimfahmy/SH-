@@ -158,7 +158,7 @@
             z-index: 30;
         }
 
-        /* --- BOUQUET & BRANCH STRUCTURE --- */
+        /* --- BOUQUET & ORGANIC PINK STEM STRUCTURE --- */
         .bouquet-container {
             position: relative;
             width: 460px;
@@ -173,7 +173,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* SVG Branches / Stems connecting from roots to pictures */
+        /* Thick, organic pinkish stems emerging from the bouquet wrap */
         .bouquet-stems {
             position: absolute;
             top: 0; left: 0;
@@ -185,11 +185,11 @@
         /* Photo Flower Heads */
         .flower-photo {
             position: absolute;
-            width: 55px; height: 55px;
+            width: 62px; height: 62px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #ffd700;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 10px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 12px rgba(255, 64, 129, 0.6);
             cursor: pointer;
             transition: transform 0.25s ease;
             z-index: 25;
@@ -368,48 +368,62 @@
         <h1 class="scene-title">Flowers For You ❤️</h1>
 
         <div class="bouquet-container">
-            <!-- SVG Branch Stems emerging from the roots / bouquet base -->
+            <!-- Thick Organic Pinkish SVG Stems emerging from the bouquet cone -->
             <svg class="bouquet-stems" viewBox="0 0 460 440">
-                <g stroke="#2e7d32" stroke-width="3" fill="none" stroke-linecap="round">
-                    <!-- Central core stem -->
-                    <path d="M 230 310 Q 230 200 230 50" />
-                    <!-- Left branches -->
-                    <path d="M 230 280 Q 180 200 100 160" />
-                    <path d="M 230 240 Q 150 160 135 115" />
-                    <path d="M 230 200 Q 130 130 65 95" />
-                    <path d="M 230 160 Q 100 100 165 65" />
-                    <path d="M 230 120 Q 160 70 195 35" />
-                    <!-- Right branches -->
-                    <path d="M 230 280 Q 280 200 360 160" />
-                    <path d="M 230 240 Q 310 160 325 115" />
-                    <path d="M 230 200 Q 330 130 395 95" />
-                    <path d="M 230 160 Q 360 100 295 65" />
-                    <path d="M 230 120 Q 300 70 265 35" />
+                <defs>
+                    <linearGradient id="stemGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#ad1457" />
+                        <stop offset="50%" stop-color="#e91e63" />
+                        <stop offset="100%" stop-color="#ff80ab" />
+                    </linearGradient>
+                </defs>
+                <g stroke="url(#stemGrad)" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(255, 64, 129, 0.5))">
+                    <path d="M 230 350 Q 230 200 212 41" />
+                    <path d="M 230 350 Q 190 190 140 71" />
+                    <path d="M 230 350 Q 270 190 282 71" />
+                    <path d="M 230 350 Q 160 180 65 111" />
+                    <path d="M 230 350 Q 300 180 395 111" />
+                    
+                    <path d="M 230 350 Q 190 210 115 131" />
+                    <path d="M 230 350 Q 270 210 325 131" />
+                    <path d="M 230 350 Q 130 210 45 176" />
+                    <path d="M 230 350 Q 330 210 415 176" />
+                    <path d="M 230 350 Q 200 220 155 171" />
+                    
+                    <path d="M 230 350 Q 260 220 287 171" />
+                    <path d="M 230 350 Q 150 240 75 211" />
+                    <path d="M 230 350 Q 310 240 347 211" />
+                    <path d="M 230 350 Q 210 260 212 226" />
+                    <path d="M 230 350 Q 180 260 135 246" />
+                    
+                    <path d="M 230 350 Q 280 260 287 246" />
+                    <path d="M 230 350 Q 220 280 212 271" />
+                    <path d="M 230 350 Q 230 310 212 311" />
                 </g>
             </svg>
 
-            <!-- 18 Photo Flower Heads (`photo2.jpg` to `photo19.jpg`) positioned at branch tips -->
-            <div class="flower-photo" style="top: 20px; left: 202px;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 50px; left: 165px;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 50px; left: 237px;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 80px; left: 35px;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 80px; left: 365px;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
+            <!-- 18 Photo Flower Heads (`photo2.jpg` to `photo19.jpg`) -->
+            <div class="flower-photo" style="top: 10px; left: 181px;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 40px; left: 109px;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 40px; left: 251px;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 80px; left: 34px;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 80px; left: 364px;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
             
-            <div class="flower-photo" style="top: 100px; left: 105px;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 100px; left: 295px;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 145px; left: 15px;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 145px; left: 385px;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 130px; left: 165px;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 100px; left: 104px;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 100px; left: 294px;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 145px; left: 14px;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 145px; left: 384px;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 140px; left: 154px;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
             
-            <div class="flower-photo" style="top: 130px; left: 235px;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 175px; left: 70px;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 175px; left: 330px;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 215px; left: 125px;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 215px; left: 275px;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 140px; left: 286px;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 180px; left: 74px;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 180px; left: 346px;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 195px; left: 181px;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 215px; left: 104px;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
             
-            <div class="flower-photo" style="top: 255px; left: 85px;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 255px; left: 315px;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 295px; left: 202px;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 215px; left: 256px;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 240px; left: 181px;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 280px; left: 181px;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
 
             <!-- Covered Roots / Bouquet Cone & Ribbon -->
             <div class="bouquet-ribbon">🎀</div>
