@@ -103,7 +103,6 @@
             text-align: center;
             z-index: 100;
             transition: opacity 0.5s ease, transform 0.5s ease;
-            will-change: transform, opacity;
         }
 
         .welcome-screen.hidden {
@@ -202,36 +201,37 @@
             margin-top: 4px;
         }
 
-        /* Photo Gallery Grid */
-        .photo-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
-            max-width: 880px;
-            max-height: 54vh;
-            overflow-y: auto;
-            padding: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,215,0,0.3) transparent;
+        /* --- HEART SHAPE PHOTO CONSTELLATION --- */
+        .heart-collage-wrapper {
+            position: relative;
+            width: 440px;
+            height: 420px;
+            margin: auto;
+            animation: floatHeartContainer 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatHeartContainer {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-8px) scale(1.02); }
         }
 
         .photo-card {
-            width: 100px; height: 100px;
+            position: absolute;
+            width: 72px; height: 72px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #ffd700;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4);
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: fadeInPhoto 0.6s ease backwards;
-            will-change: transform;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+            animation: fadeInPhoto 0.8s ease backwards;
         }
 
         .photo-card:hover {
-            transform: scale(1.16);
+            transform: scale(1.35) !important;
             border-color: #ff4081;
-            z-index: 50;
+            z-index: 100;
+            box-shadow: 0 12px 35px rgba(255, 64, 129, 0.8), 0 0 25px rgba(255, 64, 129, 0.6);
         }
 
         .photo-card img {
@@ -240,8 +240,16 @@
         }
 
         @keyframes fadeInPhoto {
-            from { opacity: 0; transform: scale(0.2); }
+            from { opacity: 0; transform: scale(0); }
             to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive scale down for smaller mobile screens */
+        @media (max-width: 500px) {
+            .heart-collage-wrapper {
+                transform: scale(0.78);
+                margin: -20px 0;
+            }
         }
 
         /* --- QR CODE FOOTER SECTION --- */
@@ -323,26 +331,39 @@
             <p>24 Years of Love & Beautiful Memories</p>
         </div>
 
-        <!-- Photo Gallery Grid (Photos 2 to 19) -->
-        <div class="photo-grid">
-            <div class="photo-card" style="animation-delay: 0.05s;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.1s;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.15s;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.2s;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.25s;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.3s;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.35s;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.4s;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.45s;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.5s;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.55s;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.6s;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.65s;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.7s;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.75s;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.8s;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.85s;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.9s;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+        <!-- Heart-Shaped Photo Constellation (Photos 2 to 19) -->
+        <div class="heart-collage-wrapper">
+            <!-- Top Lobes & Center Dip -->
+            <div class="photo-card" style="left: 208px; top: 10px; animation-delay: 0.1s;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 145px; top: 25px; animation-delay: 0.15s;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 270px; top: 25px; animation-delay: 0.2s;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 90px; top: 55px; animation-delay: 0.25s;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 325px; top: 55px; animation-delay: 0.3s;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
+            
+            <!-- Upper Edges -->
+            <div class="photo-card" style="left: 35px; top: 110px; animation-delay: 0.35s;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 380px; top: 110px; animation-delay: 0.4s;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            
+            <!-- Mid Edges -->
+            <div class="photo-card" style="left: 20px; top: 180px; animation-delay: 0.45s;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 395px; top: 180px; animation-delay: 0.5s;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            
+            <!-- Inner Upper Body -->
+            <div class="photo-card" style="left: 95px; top: 155px; animation-delay: 0.55s;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 320px; top: 155px; animation-delay: 0.6s;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
+            
+            <!-- Lower Tapering Sides -->
+            <div class="photo-card" style="left: 65px; top: 245px; animation-delay: 0.65s;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 350px; top: 245px; animation-delay: 0.7s;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
+            
+            <!-- Center Core Photos -->
+            <div class="photo-card" style="left: 170px; top: 120px; animation-delay: 0.73s;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 245px; top: 120px; animation-delay: 0.76s;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 150px; top: 210px; animation-delay: 0.8s;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
+            <div class="photo-card" style="left: 270px; top: 210px; animation-delay: 0.85s;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
+            
+            <!-- Bottom Tip of the Heart -->
+            <div class="photo-card" style="left: 208px; top: 310px; animation-delay: 0.9s;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
         </div>
 
         <!-- Scannable QR Code Section -->
