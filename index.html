@@ -169,7 +169,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 25px 20px;
+            padding: 20px 15px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.8s ease 0.3s;
@@ -183,11 +183,11 @@
 
         .main-header {
             text-align: center;
-            margin-top: 5px;
+            margin-top: 2px;
         }
 
         .main-header h1 {
-            font-size: clamp(26px, 4vw, 42px);
+            font-size: clamp(24px, 3.8vw, 38px);
             color: #ffd700;
             text-shadow: 0 3px 15px rgba(255, 215, 0, 0.5);
             font-style: italic;
@@ -195,64 +195,100 @@
         }
 
         .main-header p {
-            font-size: 14px;
+            font-size: 13px;
             color: #fce4ec;
             letter-spacing: 2px;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
-        /* --- HEART SHAPE PHOTO CONSTELLATION --- */
-        .heart-collage-wrapper {
+        /* --- FLOWER BOUQUET ARRANGEMENT --- */
+        .bouquet-wrapper {
             position: relative;
-            width: 440px;
-            height: 420px;
+            width: 420px;
+            height: 440px;
             margin: auto;
-            animation: floatHeartContainer 4s ease-in-out infinite alternate;
+            animation: floatBouquet 4s ease-in-out infinite alternate;
         }
 
-        @keyframes floatHeartContainer {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(-8px) scale(1.02); }
+        @keyframes floatBouquet {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
         }
 
-        .photo-card {
+        /* Photo cards integrated as blooming flowers in the bouquet */
+        .bouquet-item {
             position: absolute;
-            width: 72px; height: 72px;
+            width: 65px; height: 65px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #ffd700;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 215, 0, 0.5);
             cursor: pointer;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
-            animation: fadeInPhoto 0.8s ease backwards;
+            animation: fadeInFlower 0.8s ease backwards;
         }
 
-        .photo-card:hover {
+        .bouquet-item:hover {
             transform: scale(1.35) !important;
             border-color: #ff4081;
             z-index: 100;
-            box-shadow: 0 12px 35px rgba(255, 64, 129, 0.8), 0 0 25px rgba(255, 64, 129, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 64, 129, 0.8);
         }
 
-        .photo-card img {
+        .bouquet-item img {
             width: 100%; height: 100%;
             object-fit: cover;
         }
 
-        @keyframes fadeInPhoto {
+        /* Decorative flower elements interspersed in the bouquet */
+        .deco-flower {
+            position: absolute;
+            font-size: 28px;
+            pointer-events: none;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+            animation: pulseFlower 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseFlower {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        /* Bouquet Wrapper / Ribbon at the bottom */
+        .bouquet-ribbon-base {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 60px;
+            background: linear-gradient(135deg, #e91e63, #880e4f);
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            z-index: 50;
+            border: 2px solid #ffd700;
+        }
+
+        .bouquet-ribbon-base span {
+            font-size: 22px;
+        }
+
+        @keyframes fadeInFlower {
             from { opacity: 0; transform: scale(0); }
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Responsive scale down for smaller mobile screens */
         @media (max-width: 500px) {
-            .heart-collage-wrapper {
-                transform: scale(0.78);
-                margin: -20px 0;
+            .bouquet-wrapper {
+                transform: scale(0.75);
+                margin: -25px 0;
             }
         }
 
-        /* --- QR CODE FOOTER SECTION --- */
+        /* --- QR CODE FOOTER SECTION (CLICKABLE) --- */
         .qr-section {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(10px);
@@ -262,11 +298,18 @@
             align-items: center;
             gap: 12px;
             border: 1px solid rgba(255, 215, 0, 0.3);
-            margin-bottom: 5px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .qr-section:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.02);
         }
 
         .qr-code-box {
-            width: 55px; height: 55px;
+            width: 50px; height: 50px;
             background: white;
             padding: 3px;
             border-radius: 6px;
@@ -277,7 +320,7 @@
         .qr-text h4 { font-size: 13px; color: #ffd700; }
         .qr-text p { font-size: 11px; color: #fce4ec; }
 
-        /* --- LIGHTBOX MODAL --- */
+        /* --- LIGHTBOX & QR MODAL --- */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.92);
@@ -285,12 +328,33 @@
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
         }
         .lightbox.active { opacity: 1; pointer-events: auto; }
+        
         .lightbox img {
             max-width: 85vw; max-height: 85vh; border-radius: 20px; border: 4px solid #ffd700;
             box-shadow: 0 25px 70px rgba(0,0,0,0.8);
             transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .lightbox.active img { transform: scale(1); }
+
+        .qr-modal-card {
+            background: rgba(40, 15, 30, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            border: 3px solid #ffd700;
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 320px;
+        }
+        .lightbox.active .qr-modal-card { transform: scale(1); }
+        .qr-modal-card img {
+            width: 220px; height: 220px; border-radius: 10px; border: 3px solid white; margin-bottom: 15px;
+        }
+        .qr-modal-card p {
+            color: #ffd700; font-size: 15px; margin-bottom: 15px; font-weight: bold;
+        }
+
         .close-hint {
             position: absolute; bottom: 30px; color: #ffd700; font-size: 13px; letter-spacing: 2px;
             background: rgba(0,0,0,0.7); padding: 8px 20px; border-radius: 20px;
@@ -328,52 +392,57 @@
     <div class="main-content" id="mainContent">
         <div class="main-header">
             <h1>Sherien & Sherif ❤️</h1>
-            <p>24 Years of Love & Beautiful Memories</p>
+            <p>24 Years of Blooming Love & Memories</p>
         </div>
 
-        <!-- Heart-Shaped Photo Constellation (Photos 2 to 19) -->
-        <div class="heart-collage-wrapper">
-            <!-- Top Lobes & Center Dip -->
-            <div class="photo-card" style="left: 208px; top: 10px; animation-delay: 0.1s;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 145px; top: 25px; animation-delay: 0.15s;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 270px; top: 25px; animation-delay: 0.2s;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 90px; top: 55px; animation-delay: 0.25s;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 325px; top: 55px; animation-delay: 0.3s;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
+        <!-- Flower Bouquet Photo Arrangement (Photos 2 to 19 mixed with flowers) -->
+        <div class="bouquet-wrapper">
+            <!-- Decorative Flower Sprigs & Roses surrounding bouquet -->
+            <div class="deco-flower" style="left: 195px; top: -5px; animation-delay: 0s;">🌹</div>
+            <div class="deco-flower" style="left: 135px; top: 15px; animation-delay: 0.3s;">🌸</div>
+            <div class="deco-flower" style="left: 260px; top: 15px; animation-delay: 0.6s;">🌷</div>
+            <div class="deco-flower" style="left: 75px; top: 50px; animation-delay: 0.9s;">🌹</div>
+            <div class="deco-flower" style="left: 320px; top: 50px; animation-delay: 1.2s;">🌸</div>
+            <div class="deco-flower" style="left: 30px; top: 130px; animation-delay: 0.4s;">💐</div>
+            <div class="deco-flower" style="left: 360px; top: 130px; animation-delay: 0.7s;">💐</div>
+
+            <!-- Blooming Photo Flowers (Photos 2 to 19) -->
+            <div class="bouquet-item" style="left: 185px; top: 40px; animation-delay: 0.1s;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 125px; top: 60px; animation-delay: 0.15s;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 245px; top: 60px; animation-delay: 0.2s;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 70px; top: 100px; animation-delay: 0.25s;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 300px; top: 100px; animation-delay: 0.3s;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
             
-            <!-- Upper Edges -->
-            <div class="photo-card" style="left: 35px; top: 110px; animation-delay: 0.35s;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 380px; top: 110px; animation-delay: 0.4s;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 185px; top: 120px; animation-delay: 0.35s;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 125px; top: 145px; animation-delay: 0.4s;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 245px; top: 145px; animation-delay: 0.45s;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 20px; top: 175px; animation-delay: 0.5s;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 350px; top: 175px; animation-delay: 0.55s;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
             
-            <!-- Mid Edges -->
-            <div class="photo-card" style="left: 20px; top: 180px; animation-delay: 0.45s;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 395px; top: 180px; animation-delay: 0.5s;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 80px; top: 195px; animation-delay: 0.6s;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 295px; top: 195px; animation-delay: 0.65s;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 185px; top: 205px; animation-delay: 0.7s;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 130px; top: 250px; animation-delay: 0.75s;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
             
-            <!-- Inner Upper Body -->
-            <div class="photo-card" style="left: 95px; top: 155px; animation-delay: 0.55s;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 320px; top: 155px; animation-delay: 0.6s;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
-            
-            <!-- Lower Tapering Sides -->
-            <div class="photo-card" style="left: 65px; top: 245px; animation-delay: 0.65s;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 350px; top: 245px; animation-delay: 0.7s;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
-            
-            <!-- Center Core Photos -->
-            <div class="photo-card" style="left: 170px; top: 120px; animation-delay: 0.73s;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 245px; top: 120px; animation-delay: 0.76s;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 150px; top: 210px; animation-delay: 0.8s;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
-            <div class="photo-card" style="left: 270px; top: 210px; animation-delay: 0.85s;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
-            
-            <!-- Bottom Tip of the Heart -->
-            <div class="photo-card" style="left: 208px; top: 310px; animation-delay: 0.9s;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 240px; top: 250px; animation-delay: 0.8s;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 75px; top: 275px; animation-delay: 0.85s;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 300px; top: 275px; animation-delay: 0.9s;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
+            <div class="bouquet-item" style="left: 185px; top: 290px; animation-delay: 0.95s;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+
+            <!-- Bouquet Ribbon Base Wrap -->
+            <div class="bouquet-ribbon-base">
+                <span>🎀</span>
+            </div>
         </div>
 
-        <!-- Scannable QR Code Section -->
-        <div class="qr-section">
+        <!-- Scannable QR Code Section (Clickable to Enlarge) -->
+        <div class="qr-section" onclick="openQRModal()" title="Click to enlarge QR code">
             <div class="qr-code-box">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tamimfahmy.github.io/SH-/" alt="Scan QR Code">
             </div>
             <div class="qr-text">
-                <h4>Scan to Revisit</h4>
-                <p>Point your phone camera here anytime!</p>
+                <h4>Scan to Revisit 🔍</h4>
+                <p>Tap here to enlarge QR code!</p>
             </div>
         </div>
     </div>
@@ -382,6 +451,15 @@
     <div class="lightbox" id="lightbox" onclick="closePhoto()">
         <img id="lightboxImg" src="" alt="Zoomed Photo">
         <div class="close-hint">Tap anywhere to close</div>
+    </div>
+
+    <!-- Enlarged QR Code Modal -->
+    <div class="lightbox" id="qrModal" onclick="closeQRModal()">
+        <div class="qr-modal-card" onclick="event.stopPropagation()">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://tamimfahmy.github.io/SH-/" alt="Enlarged QR Code">
+            <p>Scan with any phone camera ❤️</p>
+            <button onclick="closeQRModal()" style="background: #e91e63; color: white; border: none; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: 'Georgia', serif;">Close</button>
+        </div>
     </div>
 
     <script>
@@ -462,7 +540,7 @@
             }
         }
 
-        // --- LIGHTBOX CONTROLS ---
+        // --- LIGHTBOX & PHOTO CONTROLS ---
         function openPhoto(element) {
             const img = element.querySelector('img');
             const lightboxImg = document.getElementById('lightboxImg');
@@ -472,6 +550,15 @@
 
         function closePhoto() {
             document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // --- ENLARGED QR CODE MODAL CONTROLS ---
+        function openQRModal() {
+            document.getElementById('qrModal').classList.add('active');
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').classList.remove('active');
         }
     </script>
 </body>
