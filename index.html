@@ -14,7 +14,7 @@
         body {
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #1f0b18 0%, #3d122e 50%, #12050e 100%);
+            background: linear-gradient(135deg, #12050e 0%, #2c1622 50%, #1a0d14 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,7 +26,7 @@
         /* --- BACKGROUND AUDIO ELEMENT --- */
         #bgMusic { display: none; }
 
-        /* --- ANIMATED MUSIC BAR GRAPH WIDGET (PLAY / PAUSE) --- */
+        /* --- ANIMATED MUSIC BAR GRAPH WIDGET (TOP RIGHT) --- */
         .music-player {
             position: fixed;
             top: 20px;
@@ -40,7 +40,7 @@
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            z-index: 500;
+            z-index: 600;
             color: #ffd700;
             font-size: 13px;
             font-weight: bold;
@@ -77,7 +77,7 @@
             100% { height: 16px; }
         }
 
-        /* --- ULTRA-SMOOTH CANVAS STARFIELD --- */
+        /* --- 60 FPS CANVAS STARFIELD --- */
         #starCanvas {
             position: absolute;
             top: 0; left: 0;
@@ -86,244 +86,211 @@
             pointer-events: none;
         }
 
-        /* --- FRONT WELCOME SCREEN --- */
+        /* --- TIKTOK STYLE "TAP TO OPEN" FRONT SCREEN --- */
         .welcome-screen {
             position: absolute;
-            width: 90vw; max-width: 480px;
-            padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 215, 0, 0.35);
-            border-radius: 35px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            width: 100vw; height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            z-index: 100;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 200;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            cursor: pointer;
         }
 
         .welcome-screen.hidden {
             opacity: 0;
-            transform: scale(1.1);
+            transform: scale(1.15);
             pointer-events: none;
         }
 
-        .anniversary-title {
-            font-size: clamp(22px, 3.5vw, 32px);
-            color: #ffd700;
-            font-style: italic;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 12px rgba(255, 215, 0, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .couple-names {
-            font-size: clamp(30px, 4.5vw, 42px);
+        .tap-title {
+            font-size: clamp(24px, 4vw, 36px);
             color: #ffffff;
             font-weight: bold;
+            letter-spacing: 4px;
             margin-bottom: 25px;
-            letter-spacing: 1.5px;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Pulsing Heart Button */
-        .heart-btn {
-            background: linear-gradient(135deg, #ff4081, #ad1457);
-            border: none;
-            width: 85px; height: 85px;
-            border-radius: 50%;
-            font-size: 40px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 35px rgba(255, 64, 129, 0.6);
-            animation: pulseHeart 1.5s infinite;
-            transition: transform 0.2s ease;
-        }
-
-        .heart-btn:hover { transform: scale(1.12); }
-
-        @keyframes pulseHeart {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 64, 129, 0.6); }
-            50% { transform: scale(1.15); box-shadow: 0 0 45px rgba(255, 64, 129, 0.9); }
-        }
-
-        .tap-hint {
-            margin-top: 20px;
-            font-size: 13px;
-            letter-spacing: 3px;
-            color: #f8bbd0;
+            text-shadow: 0 2px 15px rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
         }
 
-        /* --- MAIN CELEBRATION CONTENT --- */
-        .main-content {
+        .heart-pulse-btn {
+            font-size: 85px;
+            animation: pulseHeart 1.2s infinite;
+            filter: drop-shadow(0 0 25px rgba(233, 30, 99, 0.8));
+        }
+
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* --- MAIN BLOOMING BOUQUET SCENE --- */
+        .main-scene {
             position: relative;
             width: 100vw; height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 20px 15px;
+            justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease 0.3s;
+            transition: opacity 0.8s ease 0.4s;
             z-index: 10;
         }
 
-        .main-content.visible {
+        .main-scene.bloomed {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .main-header {
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        .main-header h1 {
-            font-size: clamp(24px, 4vw, 40px);
+        .scene-title {
+            position: absolute;
+            top: 35px;
+            font-size: clamp(26px, 4.5vw, 42px);
             color: #ffd700;
-            text-shadow: 0 3px 15px rgba(255, 215, 0, 0.5);
             font-style: italic;
+            text-shadow: 0 3px 15px rgba(255, 215, 0, 0.6);
             letter-spacing: 1px;
+            z-index: 30;
+            animation: fadeInTop 1s ease;
         }
 
-        .main-header p {
-            font-size: 13px;
-            color: #fce4ec;
-            letter-spacing: 2px;
-            margin-top: 2px;
+        @keyframes fadeInTop {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- BOUQUET & DANGLING FLOWER STEM STRUCTURE --- */
-        .bouquet-container {
+        /* Bouquet Wrapper Container */
+        .bouquet-wrapper {
             position: relative;
-            width: 700px;
-            height: 500px;
-            margin: auto;
-            transform-origin: center center;
+            width: 500px; height: 500px;
+            margin-top: 40px;
+            transform-origin: bottom center;
+            animation: bloomBouquet 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* Stem lines connecting bouquet elements */
-        .stem-line {
+        @keyframes bloomBouquet {
+            0% { transform: scale(0) translateY(100px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* 18 Photo Flowers positioned precisely across the bouquet top */
+        .flower-photo {
             position: absolute;
-            background: linear-gradient(to bottom, #4caf50, #2e7d32);
-            width: 3px;
-            border-radius: 2px;
-            z-index: 2;
+            width: 68px; height: 68px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 12px rgba(255, 215, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 20;
         }
 
-        /* Dangling Photo Flower Wrappers */
-        .photo-wrapper {
-            position: absolute;
-            width: 80px; height: 100px;
-            z-index: 10;
-            transform-origin: top center;
+        .flower-photo:hover {
+            transform: scale(1.3);
+            border-color: #ff4081;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(255, 64, 129, 0.8);
         }
 
-        .stem {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 3px; height: 20px; background: #2e7d32; border-radius: 2px; z-index: 11;
+        .flower-photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
         }
 
-        .dangler {
-            position: absolute; top: 18px; left: 0; width: 80px; height: 80px;
-            transform-origin: top center; animation: swing 3.5s ease-in-out infinite alternate;
-            cursor: pointer; will-change: transform;
-        }
-
-        @keyframes swing { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
-
-        .img-box {
-            width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
-            border: 3px solid #ffd700; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
-        }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .dangler:hover .img-box { transform: scale(1.3); box-shadow: 0 15px 35px rgba(255, 64, 129, 0.8); border-color: #ff4081; }
-        .photo-wrapper:hover { z-index: 100; }
-
-        /* Bouquet Wrap / Ribbon Base at the bottom */
-        .bouquet-wrap-base {
+        /* Purple Paper Bouquet Cone Wrap */
+        .bouquet-cone {
             position: absolute;
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 140px;
-            height: 70px;
-            background: linear-gradient(135deg, #e91e63, #880e4f);
+            width: 180px; height: 190px;
+            background: linear-gradient(135deg, #7b1fa2, #4a148c);
             clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
             z-index: 15;
-            border: 2px solid #ffd700;
-        }
-        .bouquet-wrap-base span { font-size: 26px; }
-
-        /* Coordinates for all 18 photos (`photo2.jpg` to `photo19.jpg`) in bouquet arrangement */
-        .p2  { top: 40px; left: 310px; }
-        .p3  { top: 60px; left: 220px; }
-        .p4  { top: 60px; left: 400px; }
-        .p5  { top: 120px; left: 140px; }
-        .p6  { top: 120px; left: 480px; }
-        .p7  { top: 100px; left: 265px; }
-        .p8  { top: 100px; left: 355px; }
-        .p9  { top: 160px; left: 200px; }
-        .p10 { top: 160px; left: 420px; }
-        .p11 { top: 180px; left: 310px; }
-        .p12 { top: 220px; left: 120px; }
-        .p13 { top: 220px; left: 500px; }
-        .p14 { top: 240px; left: 230px; }
-        .p15 { top: 240px; left: 390px; }
-        .p16 { top: 290px; left: 170px; }
-        .p17 { top: 290px; left: 450px; }
-        .p18 { top: 310px; left: 310px; }
-        .p19 { top: 350px; left: 310px; }
-
-        /* Mobile Responsive Scaling */
-        @media (max-width: 750px) {
-            .bouquet-container { transform: scale(0.62); margin: -40px 0; }
+            border: 2px solid rgba(255, 215, 0, 0.4);
         }
 
-        /* --- QR CODE FOOTER SECTION (CLICKABLE) --- */
-        .qr-section {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(10px);
-            padding: 8px 16px;
+        .bouquet-ribbon {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 38px;
+            z-index: 18;
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.6));
+        }
+
+        /* --- SLIDING LOVE LETTER CARD --- */
+        .love-letter-card {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%) translateY(250px) scale(0.8);
+            width: 320px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #4a1535;
+            padding: 22px;
             border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            border: 3px solid #ffd700;
+            z-index: 25;
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+            text-align: center;
+        }
+
+        .love-letter-card.slide-up {
+            transform: translateX(-50%) translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .love-letter-card h3 {
+            font-size: 20px;
+            color: #880e4f;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .love-letter-card p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #5c1d39;
+            margin-bottom: 12px;
+        }
+
+        .panda-gif {
+            width: 70px; height: 70px;
+            margin: 0 auto 10px auto;
+            display: block;
+        }
+
+        /* --- SCANNABLE QR CODE FOOTER --- */
+        .qr-section {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 6px 12px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             border: 1px solid rgba(255, 215, 0, 0.3);
-            margin-bottom: 2px;
             cursor: pointer;
+            z-index: 500;
             transition: transform 0.2s, background 0.2s;
         }
-
-        .qr-section:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: scale(1.02);
-        }
-
-        .qr-code-box {
-            width: 48px; height: 48px;
-            background: white;
-            padding: 3px;
-            border-radius: 6px;
-        }
-
+        .qr-section:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.03); }
+        .qr-code-box { width: 40px; height: 40px; background: white; padding: 2px; border-radius: 5px; }
         .qr-code-box img { width: 100%; height: 100%; }
-
-        .qr-text h4 { font-size: 13px; color: #ffd700; }
-        .qr-text p { font-size: 11px; color: #fce4ec; }
+        .qr-text h4 { font-size: 11px; color: #ffd700; }
+        .qr-text p { font-size: 10px; color: #fce4ec; }
 
         /* --- LIGHTBOX & QR MODAL --- */
         .lightbox {
@@ -333,7 +300,6 @@
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
         }
         .lightbox.active { opacity: 1; pointer-events: auto; }
-        
         .lightbox img {
             max-width: 85vw; max-height: 85vh; border-radius: 20px; border: 4px solid #ffd700;
             box-shadow: 0 25px 70px rgba(0,0,0,0.8);
@@ -353,16 +319,16 @@
             max-width: 320px;
         }
         .lightbox.active .qr-modal-card { transform: scale(1); }
-        .qr-modal-card img {
-            width: 220px; height: 220px; border-radius: 10px; border: 3px solid white; margin-bottom: 15px;
-        }
-        .qr-modal-card p {
-            color: #ffd700; font-size: 15px; margin-bottom: 15px; font-weight: bold;
-        }
+        .qr-modal-card img { width: 220px; height: 220px; border-radius: 10px; border: 3px solid white; margin-bottom: 15px; }
+        .qr-modal-card p { color: #ffd700; font-size: 15px; margin-bottom: 15px; font-weight: bold; }
 
         .close-hint {
             position: absolute; bottom: 30px; color: #ffd700; font-size: 13px; letter-spacing: 2px;
             background: rgba(0,0,0,0.7); padding: 8px 20px; border-radius: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .bouquet-wrapper { transform: scale(0.72); }
         }
     </style>
 </head>
@@ -382,50 +348,54 @@
         <span id="musicLabel">Playing Music</span>
     </div>
 
-    <!-- Ultra-Smooth Canvas Starfield Background -->
+    <!-- 60 FPS Canvas Starfield -->
     <canvas id="starCanvas"></canvas>
 
-    <!-- FRONT WELCOME SCREEN -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <div class="anniversary-title">Happy 24th Anniversary</div>
-        <div class="couple-names">Sherien & Sherif</div>
-        <button class="heart-btn" onclick="startCelebration()">❤️</button>
-        <div class="tap-hint">Tap the heart to enter</div>
+    <!-- TIKTOK STYLE WELCOME SCREEN -->
+    <div class="welcome-screen" id="welcomeScreen" onclick="startCelebration()">
+        <div class="tap-title">TAP TO OPEN</div>
+        <div class="heart-pulse-btn">💜</div>
     </div>
 
-    <!-- MAIN CELEBRATION CONTENT -->
-    <div class="main-content" id="mainContent">
-        <div class="main-header">
-            <h1>Sherien & Sherif ❤️</h1>
-            <p>24 Years of Blooming Love & Memories</p>
+    <!-- MAIN BLOOMING BOUQUET SCENE -->
+    <div class="main-scene" id="mainScene">
+        <h1 class="scene-title">Flowers For You ❤️</h1>
+
+        <div class="bouquet-wrapper">
+            <!-- 18 Photo Flower Heads (`photo2.jpg` to `photo19.jpg`) Arranged Across Bouquet Top -->
+            <div class="flower-photo" style="top: 20px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 40px; left: 140px;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 40px; left: 292px;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 85px; left: 75px;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 85px; left: 357px;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
+            
+            <div class="flower-photo" style="top: 100px; left: 180px;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 100px; left: 252px;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 145px; left: 25px;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 145px; left: 407px;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 155px; left: 115px;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
+            
+            <div class="flower-photo" style="top: 155px; left: 317px;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 200px; left: 70px;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 200px; left: 362px;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 215px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 260px; left: 130px;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
+            
+            <div class="flower-photo" style="top: 260px; left: 302px;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 290px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 330px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+
+            <!-- Purple Cone Wrap & Ribbon -->
+            <div class="bouquet-ribbon">🎀</div>
+            <div class="bouquet-cone"></div>
         </div>
 
-        <!-- Dangling Flower Bouquet Structure (Photos 2 to 19) -->
-        <div class="bouquet-container">
-            <!-- Dangling Flower Photo Nodes -->
-            <div class="photo-wrapper p2"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: 0s;"><div class="img-box"><img src="images/photo2.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p3"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.5s;"><div class="img-box"><img src="images/photo3.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p4"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1s;"><div class="img-box"><img src="images/photo4.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p5"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.5s;"><div class="img-box"><img src="images/photo5.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p6"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -2s;"><div class="img-box"><img src="images/photo6.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p7"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.3s;"><div class="img-box"><img src="images/photo7.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p8"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.2s;"><div class="img-box"><img src="images/photo8.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p9"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.7s;"><div class="img-box"><img src="images/photo9.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p10"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.8s;"><div class="img-box"><img src="images/photo10.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p11"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.4s;"><div class="img-box"><img src="images/photo11.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p12"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.1s;"><div class="img-box"><img src="images/photo12.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p13"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.6s;"><div class="img-box"><img src="images/photo13.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p14"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.4s;"><div class="img-box"><img src="images/photo14.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p15"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.2s;"><div class="img-box"><img src="images/photo15.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p16"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.6s;"><div class="img-box"><img src="images/photo16.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p17"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.9s;"><div class="img-box"><img src="images/photo17.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p18"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -1.3s;"><div class="img-box"><img src="images/photo18.jpg" alt="Memory"></div></div></div>
-            <div class="photo-wrapper p19"><div class="stem"></div><div class="dangler" onclick="openPhoto(this)" style="animation-delay: -0.5s;"><div class="img-box"><img src="images/photo19.jpg" alt="Memory"></div></div></div>
-
-            <!-- Bouquet Ribbon Wrap at Bottom -->
-            <div class="bouquet-wrap-base">
-                <span>🎀</span>
-            </div>
+        <!-- Sliding Love Letter Card -->
+        <div class="love-letter-card" id="loveLetter">
+            <img class="panda-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1dzN5bmd0cHB0Mml1dmZocnhlZjZqbmw4ZWN3dWhhbXF6ajNobyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Lus9060bK6X7y/giphy.gif" alt="Cute Bears">
+            <h3>Dear Sherien & Sherif</h3>
+            <p>Today is not a special day, but for me it is a unique day. 24 years of incredible love, grace, and beautiful memories together.</p>
+            <p style="font-style: italic; font-weight: bold; color: #880e4f;">Happy 24th Anniversary! ❤️</p>
         </div>
 
         <!-- Scannable QR Code Section (Clickable to Enlarge) -->
@@ -435,7 +405,7 @@
             </div>
             <div class="qr-text">
                 <h4>Scan to Revisit 🔍</h4>
-                <p>Tap here to enlarge QR code!</p>
+                <p>Tap to enlarge!</p>
             </div>
         </div>
     </div>
@@ -456,7 +426,7 @@
     </div>
 
     <script>
-        // --- 60 FPS BUTTER-SMOOTH CANVAS STARFIELD ---
+        // --- 60 FPS CANVAS STARFIELD ---
         const canvas = document.getElementById('starCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -517,8 +487,13 @@
             });
 
             document.getElementById('welcomeScreen').classList.add('hidden');
-            document.getElementById('mainContent').classList.add('visible');
-            musicPlayer.classList.add('visible'); 
+            document.getElementById('mainScene').classList.add('bloomed');
+            musicPlayer.classList.add('visible');
+
+            // Slide up the love letter card slightly after bouquet blooms
+            setTimeout(() => {
+                document.getElementById('loveLetter').classList.add('slide-up');
+            }, 600);
         }
 
         function toggleAudio() {
