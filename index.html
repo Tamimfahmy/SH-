@@ -48,6 +48,7 @@
             transition: background 0.2s, transform 0.2s;
             opacity: 0;
             pointer-events: none;
+            will-change: transform;
         }
         .music-player.visible {
             opacity: 1;
@@ -86,7 +87,7 @@
             pointer-events: none;
         }
 
-        /* --- TIKTOK STYLE "TAP TO OPEN" FRONT SCREEN --- */
+        /* --- WELCOME SCREEN --- */
         .welcome-screen {
             position: absolute;
             width: 100vw; height: 100vh;
@@ -95,18 +96,19 @@
             justify-content: center;
             align-items: center;
             z-index: 200;
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             cursor: pointer;
+            will-change: transform, opacity;
         }
 
         .welcome-screen.hidden {
             opacity: 0;
-            transform: scale(1.15);
+            transform: scale(1.1);
             pointer-events: none;
         }
 
         .tap-title {
-            font-size: clamp(24px, 4vw, 36px);
+            font-size: clamp(22px, 4vw, 34px);
             color: #ffffff;
             font-weight: bold;
             letter-spacing: 4px;
@@ -126,7 +128,7 @@
             50% { transform: scale(1.2); }
         }
 
-        /* --- MAIN BLOOMING BOUQUET SCENE --- */
+        /* --- MAIN CELEBRATION SCENE --- */
         .main-scene {
             position: relative;
             width: 100vw; height: 100vh;
@@ -136,7 +138,7 @@
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease 0.4s;
+            transition: opacity 0.6s ease 0.2s;
             z-index: 10;
         }
 
@@ -147,53 +149,57 @@
 
         .scene-title {
             position: absolute;
-            top: 35px;
-            font-size: clamp(26px, 4.5vw, 42px);
+            top: 15px;
+            font-size: clamp(22px, 3.8vw, 34px);
             color: #ffd700;
             font-style: italic;
             text-shadow: 0 3px 15px rgba(255, 215, 0, 0.6);
             letter-spacing: 1px;
             z-index: 30;
-            animation: fadeInTop 1s ease;
         }
 
-        @keyframes fadeInTop {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Bouquet Wrapper Container */
-        .bouquet-wrapper {
+        /* --- BOUQUET & BRANCH STRUCTURE --- */
+        .bouquet-container {
             position: relative;
-            width: 500px; height: 500px;
-            margin-top: 40px;
-            transform-origin: bottom center;
-            animation: bloomBouquet 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            width: 460px;
+            height: 440px;
+            margin-top: 20px;
+            animation: bloomBouquet 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            will-change: transform;
         }
 
         @keyframes bloomBouquet {
-            0% { transform: scale(0) translateY(100px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        /* 18 Photo Flowers positioned precisely across the bouquet top */
+        /* SVG Branches / Stems connecting from roots to pictures */
+        .bouquet-stems {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Photo Flower Heads */
         .flower-photo {
             position: absolute;
-            width: 68px; height: 68px;
+            width: 55px; height: 55px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #ffd700;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 12px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 10px rgba(255, 215, 0, 0.4);
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 20;
+            transition: transform 0.25s ease;
+            z-index: 25;
+            will-change: transform;
         }
 
         .flower-photo:hover {
-            transform: scale(1.3);
+            transform: scale(1.35);
             border-color: #ff4081;
             z-index: 100;
-            box-shadow: 0 10px 30px rgba(255, 64, 129, 0.8);
         }
 
         .flower-photo img {
@@ -201,73 +207,73 @@
             object-fit: cover;
         }
 
-        /* Purple Paper Bouquet Cone Wrap */
+        /* Covered Roots / Bouquet Wrapper Cone */
         .bouquet-cone {
             position: absolute;
-            bottom: 40px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 180px; height: 190px;
+            width: 160px; height: 150px;
             background: linear-gradient(135deg, #7b1fa2, #4a148c);
             clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
             z-index: 15;
-            border: 2px solid rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
         .bouquet-ribbon {
             position: absolute;
-            bottom: 120px;
+            bottom: 95px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 38px;
-            z-index: 18;
-            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.6));
+            font-size: 34px;
+            z-index: 20;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
         }
 
-        /* --- SLIDING LOVE LETTER CARD --- */
-        .love-letter-card {
+        /* --- LETTER TOGGLE BUTTON & MODAL CARD --- */
+        .letter-toggle-btn {
             position: absolute;
-            bottom: 50px;
+            bottom: 15px;
             left: 50%;
-            transform: translateX(-50%) translateY(250px) scale(0.8);
-            width: 320px;
-            background: rgba(255, 255, 255, 0.95);
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            color: white;
+            border: 2px solid #ffd700;
+            padding: 9px 22px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 50;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+        }
+        .letter-toggle-btn:hover { transform: translateX(-50%) scale(1.05); }
+
+        .letter-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
+        }
+        .letter-modal.active { opacity: 1; pointer-events: auto; }
+
+        .letter-card-content {
+            background: rgba(255, 255, 255, 0.96);
             color: #4a1535;
-            padding: 22px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-            border: 3px solid #ffd700;
-            z-index: 25;
-            opacity: 0;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%; max-width: 380px;
             text-align: center;
+            border: 3px solid #ffd700;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .love-letter-card.slide-up {
-            transform: translateX(-50%) translateY(0) scale(1);
-            opacity: 1;
-        }
-
-        .love-letter-card h3 {
-            font-size: 20px;
-            color: #880e4f;
-            margin-bottom: 8px;
-            font-style: italic;
-        }
-
-        .love-letter-card p {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #5c1d39;
-            margin-bottom: 12px;
-        }
-
-        .panda-gif {
-            width: 70px; height: 70px;
-            margin: 0 auto 10px auto;
-            display: block;
-        }
+        .letter-modal.active .letter-card-content { transform: scale(1); }
+        .letter-card-content h3 { font-size: 22px; color: #880e4f; margin-bottom: 10px; font-style: italic; }
+        .letter-card-content p { font-size: 14px; line-height: 1.6; color: #5c1d39; margin-bottom: 15px; }
 
         /* --- SCANNABLE QR CODE FOOTER --- */
         .qr-section {
@@ -328,7 +334,7 @@
         }
 
         @media (max-width: 600px) {
-            .bouquet-wrapper { transform: scale(0.72); }
+            .bouquet-container { transform: scale(0.72); margin-top: 5px; }
         }
     </style>
 </head>
@@ -351,54 +357,69 @@
     <!-- 60 FPS Canvas Starfield -->
     <canvas id="starCanvas"></canvas>
 
-    <!-- TIKTOK STYLE WELCOME SCREEN -->
+    <!-- WELCOME SCREEN -->
     <div class="welcome-screen" id="welcomeScreen" onclick="startCelebration()">
         <div class="tap-title">TAP TO OPEN</div>
         <div class="heart-pulse-btn">💜</div>
     </div>
 
-    <!-- MAIN BLOOMING BOUQUET SCENE -->
+    <!-- MAIN CELEBRATION SCENE -->
     <div class="main-scene" id="mainScene">
         <h1 class="scene-title">Flowers For You ❤️</h1>
 
-        <div class="bouquet-wrapper">
-            <!-- 18 Photo Flower Heads (`photo2.jpg` to `photo19.jpg`) Arranged Across Bouquet Top -->
-            <div class="flower-photo" style="top: 20px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 40px; left: 140px;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 40px; left: 292px;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 85px; left: 75px;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 85px; left: 357px;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
-            
-            <div class="flower-photo" style="top: 100px; left: 180px;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 100px; left: 252px;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 145px; left: 25px;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 145px; left: 407px;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 155px; left: 115px;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
-            
-            <div class="flower-photo" style="top: 155px; left: 317px;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 200px; left: 70px;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 200px; left: 362px;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 215px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 260px; left: 130px;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
-            
-            <div class="flower-photo" style="top: 260px; left: 302px;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 290px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
-            <div class="flower-photo" style="top: 330px; left: 216px;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+        <div class="bouquet-container">
+            <!-- SVG Branch Stems emerging from the roots / bouquet base -->
+            <svg class="bouquet-stems" viewBox="0 0 460 440">
+                <g stroke="#2e7d32" stroke-width="3" fill="none" stroke-linecap="round">
+                    <!-- Central core stem -->
+                    <path d="M 230 310 Q 230 200 230 50" />
+                    <!-- Left branches -->
+                    <path d="M 230 280 Q 180 200 100 160" />
+                    <path d="M 230 240 Q 150 160 135 115" />
+                    <path d="M 230 200 Q 130 130 65 95" />
+                    <path d="M 230 160 Q 100 100 165 65" />
+                    <path d="M 230 120 Q 160 70 195 35" />
+                    <!-- Right branches -->
+                    <path d="M 230 280 Q 280 200 360 160" />
+                    <path d="M 230 240 Q 310 160 325 115" />
+                    <path d="M 230 200 Q 330 130 395 95" />
+                    <path d="M 230 160 Q 360 100 295 65" />
+                    <path d="M 230 120 Q 300 70 265 35" />
+                </g>
+            </svg>
 
-            <!-- Purple Cone Wrap & Ribbon -->
+            <!-- 18 Photo Flower Heads (`photo2.jpg` to `photo19.jpg`) positioned at branch tips -->
+            <div class="flower-photo" style="top: 20px; left: 202px;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 50px; left: 165px;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 50px; left: 237px;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 80px; left: 35px;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 80px; left: 365px;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
+            
+            <div class="flower-photo" style="top: 100px; left: 105px;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 100px; left: 295px;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 145px; left: 15px;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 145px; left: 385px;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 130px; left: 165px;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
+            
+            <div class="flower-photo" style="top: 130px; left: 235px;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 175px; left: 70px;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 175px; left: 330px;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 215px; left: 125px;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 215px; left: 275px;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
+            
+            <div class="flower-photo" style="top: 255px; left: 85px;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 255px; left: 315px;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
+            <div class="flower-photo" style="top: 295px; left: 202px;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+
+            <!-- Covered Roots / Bouquet Cone & Ribbon -->
             <div class="bouquet-ribbon">🎀</div>
             <div class="bouquet-cone"></div>
         </div>
 
-        <!-- Sliding Love Letter Card -->
-        <div class="love-letter-card" id="loveLetter">
-            <img class="panda-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1dzN5bmd0cHB0Mml1dmZocnhlZjZqbmw4ZWN3dWhhbXF6ajNobyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Lus9060bK6X7y/giphy.gif" alt="Cute Bears">
-            <h3>Dear Sherien & Sherif</h3>
-            <p>Today is not a special day, but for me it is a unique day. 24 years of incredible love, grace, and beautiful memories together.</p>
-            <p style="font-style: italic; font-weight: bold; color: #880e4f;">Happy 24th Anniversary! ❤️</p>
-        </div>
+        <!-- Letter Toggle Button -->
+        <button class="letter-toggle-btn" onclick="openLetterModal()">💌 Read Love Letter</button>
 
-        <!-- Scannable QR Code Section (Clickable to Enlarge) -->
+        <!-- Scannable QR Code Section -->
         <div class="qr-section" onclick="openQRModal()" title="Click to enlarge QR code">
             <div class="qr-code-box">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tamimfahmy.github.io/SH-/" alt="Scan QR Code">
@@ -407,6 +428,15 @@
                 <h4>Scan to Revisit 🔍</h4>
                 <p>Tap to enlarge!</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Love Letter Modal -->
+    <div class="letter-modal" id="letterModal" onclick="closeLetterModal()">
+        <div class="letter-card-content" onclick="event.stopPropagation()">
+            <h3>Dear Sherien & Sherif</h3>
+            <p>Happy late 24th anniversary! We wish you many more years filled with endless love, health, and beautiful memories together. ❤️</p>
+            <button onclick="closeLetterModal()" style="background: #e91e63; color: white; border: none; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-weight: bold; font-family: 'Georgia', serif;">Close</button>
         </div>
     </div>
 
@@ -438,14 +468,14 @@
         resizeCanvas();
 
         const stars = [];
-        for (let i = 0; i < 55; i++) {
+        for (let i = 0; i < 50; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 2.2 + 0.8,
-                speed: Math.random() * 0.35 + 0.15,
+                size: Math.random() * 2 + 0.8,
+                speed: Math.random() * 0.3 + 0.1,
                 opacity: Math.random(),
-                opacitySpeed: Math.random() * 0.015 + 0.005
+                opacitySpeed: Math.random() * 0.01 + 0.004
             });
         }
 
@@ -489,11 +519,6 @@
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('mainScene').classList.add('bloomed');
             musicPlayer.classList.add('visible');
-
-            // Slide up the love letter card slightly after bouquet blooms
-            setTimeout(() => {
-                document.getElementById('loveLetter').classList.add('slide-up');
-            }, 600);
         }
 
         function toggleAudio() {
@@ -506,6 +531,14 @@
                 musicPlayer.classList.remove('playing');
                 musicLabel.innerText = "Paused";
             }
+        }
+
+        // --- LETTER MODAL CONTROLS ---
+        function openLetterModal() {
+            document.getElementById('letterModal').classList.add('active');
+        }
+        function closeLetterModal() {
+            document.getElementById('letterModal').classList.remove('active');
         }
 
         // --- LIGHTBOX & PHOTO CONTROLS ---
