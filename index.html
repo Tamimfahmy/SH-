@@ -14,7 +14,7 @@
         body {
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #2c1622 0%, #4a1535 50%, #1a0d14 100%);
+            background: linear-gradient(135deg, #1f0b18 0%, #3d122e 50%, #12050e 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,9 +29,9 @@
         /* --- ANIMATED MUSIC BAR GRAPH WIDGET (PLAY / PAUSE) --- */
         .music-player {
             position: fixed;
-            top: 25px;
-            right: 25px;
-            background: rgba(255, 255, 255, 0.1);
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 215, 0, 0.4);
             padding: 8px 16px;
@@ -44,7 +44,7 @@
             color: #ffd700;
             font-size: 13px;
             font-weight: bold;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
             transition: background 0.2s, transform 0.2s;
             opacity: 0;
             pointer-events: none;
@@ -53,7 +53,7 @@
             opacity: 1;
             pointer-events: auto;
         }
-        .music-player:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+        .music-player:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.05); }
 
         .bars {
             display: flex;
@@ -67,7 +67,6 @@
             border-radius: 2px;
             height: 4px;
         }
-        /* Equalizer Animation when playing */
         .music-player.playing .bar:nth-child(1) { animation: bounceBar 0.5s infinite alternate; }
         .music-player.playing .bar:nth-child(2) { animation: bounceBar 0.3s infinite alternate; }
         .music-player.playing .bar:nth-child(3) { animation: bounceBar 0.6s infinite alternate; }
@@ -78,38 +77,25 @@
             100% { height: 16px; }
         }
 
-        /* --- FLOATING STARS & SPARKLES CONTAINER --- */
-        .stars-container {
+        /* --- ULTRA-SMOOTH CANVAS STARFIELD --- */
+        #starCanvas {
             position: absolute;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            overflow: hidden; z-index: 1; pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            color: #ffd700;
-            animation: floatStar linear infinite;
-            will-change: transform, opacity;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
-        }
-
-        @keyframes floatStar {
-            0% { transform: translateY(105vh) translateX(0) scale(0.5); opacity: 0; }
-            20% { opacity: 0.9; }
-            80% { opacity: 0.9; }
-            100% { transform: translateY(-10vh) translateX(50px) scale(1.2); opacity: 0; }
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 1;
+            pointer-events: none;
         }
 
         /* --- FRONT WELCOME SCREEN --- */
         .welcome-screen {
             position: absolute;
-            width: 90vw; max-width: 500px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(18px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            width: 90vw; max-width: 480px;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.35);
             border-radius: 35px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -117,6 +103,7 @@
             text-align: center;
             z-index: 100;
             transition: opacity 0.5s ease, transform 0.5s ease;
+            will-change: transform, opacity;
         }
 
         .welcome-screen.hidden {
@@ -126,52 +113,52 @@
         }
 
         .anniversary-title {
-            font-size: clamp(26px, 4vw, 36px);
+            font-size: clamp(22px, 3.5vw, 32px);
             color: #ffd700;
             font-style: italic;
             font-weight: bold;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+            margin-bottom: 8px;
+            text-shadow: 0 2px 12px rgba(255, 215, 0, 0.5);
+            letter-spacing: 1px;
         }
 
         .couple-names {
-            font-size: clamp(32px, 5vw, 44px);
+            font-size: clamp(30px, 4.5vw, 42px);
             color: #ffffff;
             font-weight: bold;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            margin-bottom: 25px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
         }
 
         /* Pulsing Heart Button */
         .heart-btn {
-            background: linear-gradient(135deg, #ff4081, #c51162);
+            background: linear-gradient(135deg, #ff4081, #ad1457);
             border: none;
-            width: 90px; height: 90px;
+            width: 85px; height: 85px;
             border-radius: 50%;
-            font-size: 45px;
+            font-size: 40px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 30px rgba(255, 64, 129, 0.6);
+            box-shadow: 0 0 35px rgba(255, 64, 129, 0.6);
             animation: pulseHeart 1.5s infinite;
             transition: transform 0.2s ease;
         }
 
-        .heart-btn:hover {
-            transform: scale(1.12);
-        }
+        .heart-btn:hover { transform: scale(1.12); }
 
         @keyframes pulseHeart {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 64, 129, 0.6); }
-            50% { transform: scale(1.15); box-shadow: 0 0 40px rgba(255, 64, 129, 0.9); }
+            50% { transform: scale(1.15); box-shadow: 0 0 45px rgba(255, 64, 129, 0.9); }
         }
 
         .tap-hint {
             margin-top: 20px;
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #ff80ab;
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #f8bbd0;
             text-transform: uppercase;
         }
 
@@ -183,7 +170,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 30px 20px;
+            padding: 25px 20px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.8s ease 0.3s;
@@ -197,21 +184,22 @@
 
         .main-header {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .main-header h1 {
-            font-size: clamp(28px, 4.5vw, 48px);
+            font-size: clamp(26px, 4vw, 42px);
             color: #ffd700;
             text-shadow: 0 3px 15px rgba(255, 215, 0, 0.5);
             font-style: italic;
+            letter-spacing: 1px;
         }
 
         .main-header p {
-            font-size: 16px;
-            color: #f8bbd0;
-            letter-spacing: 1.5px;
-            margin-top: 5px;
+            font-size: 14px;
+            color: #fce4ec;
+            letter-spacing: 2px;
+            margin-top: 4px;
         }
 
         /* Photo Gallery Grid */
@@ -219,26 +207,29 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            max-width: 900px;
-            max-height: 52vh;
+            gap: 16px;
+            max-width: 880px;
+            max-height: 54vh;
             overflow-y: auto;
             padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,215,0,0.3) transparent;
         }
 
         .photo-card {
-            width: 110px; height: 110px;
+            width: 100px; height: 100px;
             border-radius: 50%;
             overflow: hidden;
-            border: 4px solid #ffd700;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 3px solid #ffd700;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: fadeInPhoto 0.6s ease backwards;
+            will-change: transform;
         }
 
         .photo-card:hover {
-            transform: scale(1.18);
+            transform: scale(1.16);
             border-color: #ff4081;
             z-index: 50;
         }
@@ -255,42 +246,33 @@
 
         /* --- QR CODE FOOTER SECTION --- */
         .qr-section {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             border: 1px solid rgba(255, 215, 0, 0.3);
             margin-bottom: 5px;
         }
 
         .qr-code-box {
-            width: 65px; height: 65px;
+            width: 55px; height: 55px;
             background: white;
-            padding: 4px;
-            border-radius: 8px;
+            padding: 3px;
+            border-radius: 6px;
         }
 
-        .qr-code-box img {
-            width: 100%; height: 100%;
-        }
+        .qr-code-box img { width: 100%; height: 100%; }
 
-        .qr-text h4 {
-            font-size: 14px;
-            color: #ffd700;
-        }
-
-        .qr-text p {
-            font-size: 12px;
-            color: #fce4ec;
-        }
+        .qr-text h4 { font-size: 13px; color: #ffd700; }
+        .qr-text p { font-size: 11px; color: #fce4ec; }
 
         /* --- LIGHTBOX MODAL --- */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             display: flex; justify-content: center; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
         }
@@ -302,7 +284,7 @@
         }
         .lightbox.active img { transform: scale(1); }
         .close-hint {
-            position: absolute; bottom: 30px; color: #ffd700; font-size: 14px; letter-spacing: 2px;
+            position: absolute; bottom: 30px; color: #ffd700; font-size: 13px; letter-spacing: 2px;
             background: rgba(0,0,0,0.7); padding: 8px 20px; border-radius: 20px;
         }
     </style>
@@ -323,8 +305,8 @@
         <span id="musicLabel">Playing Music</span>
     </div>
 
-    <!-- Floating Star Field Container -->
-    <div class="stars-container" id="starsContainer"></div>
+    <!-- Ultra-Smooth Canvas Starfield Background -->
+    <canvas id="starCanvas"></canvas>
 
     <!-- FRONT WELCOME SCREEN -->
     <div class="welcome-screen" id="welcomeScreen">
@@ -343,24 +325,24 @@
 
         <!-- Photo Gallery Grid (Photos 2 to 19) -->
         <div class="photo-grid">
-            <div class="photo-card" style="animation-delay: 0.1s;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.15s;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.2s;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.25s;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.3s;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.35s;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.4s;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.45s;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.5s;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.55s;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.6s;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.65s;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.7s;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.75s;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.8s;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.85s;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.9s;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
-            <div class="photo-card" style="animation-delay: 0.95s;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.05s;" onclick="openPhoto(this)"><img src="images/photo2.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.1s;" onclick="openPhoto(this)"><img src="images/photo3.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.15s;" onclick="openPhoto(this)"><img src="images/photo4.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.2s;" onclick="openPhoto(this)"><img src="images/photo5.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.25s;" onclick="openPhoto(this)"><img src="images/photo6.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.3s;" onclick="openPhoto(this)"><img src="images/photo7.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.35s;" onclick="openPhoto(this)"><img src="images/photo8.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.4s;" onclick="openPhoto(this)"><img src="images/photo9.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.45s;" onclick="openPhoto(this)"><img src="images/photo10.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.5s;" onclick="openPhoto(this)"><img src="images/photo11.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.55s;" onclick="openPhoto(this)"><img src="images/photo12.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.6s;" onclick="openPhoto(this)"><img src="images/photo13.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.65s;" onclick="openPhoto(this)"><img src="images/photo14.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.7s;" onclick="openPhoto(this)"><img src="images/photo15.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.75s;" onclick="openPhoto(this)"><img src="images/photo16.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.8s;" onclick="openPhoto(this)"><img src="images/photo17.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.85s;" onclick="openPhoto(this)"><img src="images/photo18.jpg" alt="Memory"></div>
+            <div class="photo-card" style="animation-delay: 0.9s;" onclick="openPhoto(this)"><img src="images/photo19.jpg" alt="Memory"></div>
         </div>
 
         <!-- Scannable QR Code Section -->
@@ -382,20 +364,52 @@
     </div>
 
     <script>
-        // --- GENERATE SLOW, RANDOM FLOATING STARS ---
-        const starsContainer = document.getElementById('starsContainer');
-        const starSymbols = ['⭐', '✨', '🌟', '✦', '·'];
-        
-        for (let i = 0; i < 45; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.innerHTML = starSymbols[Math.floor(Math.random() * starSymbols.length)];
-            star.style.left = `${Math.random() * 100}vw`;
-            star.style.fontSize = `${10 + Math.random() * 22}px`;
-            star.style.animationDuration = `${8 + Math.random() * 10}s`;
-            star.style.animationDelay = `${Math.random() * 10}s`;
-            starsContainer.appendChild(star);
+        // --- 60 FPS BUTTER-SMOOTH CANVAS STARFIELD ---
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const stars = [];
+        for (let i = 0; i < 55; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2.2 + 0.8,
+                speed: Math.random() * 0.35 + 0.15,
+                opacity: Math.random(),
+                opacitySpeed: Math.random() * 0.015 + 0.005
+            });
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let star of stars) {
+                star.y -= star.speed;
+                if (star.y < 0) {
+                    star.y = canvas.height;
+                    star.x = Math.random() * canvas.width;
+                }
+
+                star.opacity += star.opacitySpeed;
+                if (star.opacity > 1 || star.opacity < 0.15) {
+                    star.opacitySpeed = -star.opacitySpeed;
+                }
+
+                ctx.fillStyle = `rgba(255, 215, 0, ${star.opacity})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
 
         // --- AUDIO & WIDGET CONTROLS ---
         const audio = document.getElementById('bgMusic');
@@ -412,7 +426,7 @@
 
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('mainContent').classList.add('visible');
-            musicPlayer.classList.add('visible'); // Show the bouncing bar graph widget once inside
+            musicPlayer.classList.add('visible'); 
         }
 
         function toggleAudio() {
